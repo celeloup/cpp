@@ -1,25 +1,26 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+#include "NinjaTrap.hpp"
 
 int main( void )
 {
     FragTrap frag;
-    FragTrap trap("Michel");
+    FragTrap trap("Roger");
     
-    frag.rangedAttack("Michel");
+    frag.rangedAttack("Roger");
     trap.takeDamage(20);
 	trap.beRepaired(80);
-    frag.meleeAttack("Michel");
+    frag.meleeAttack("Roger");
     trap.takeDamage(30);
     trap.beRepaired(10);
     trap.takeDamage(100);
     trap.beRepaired(33);
     
-    frag.vaulthunter_dot_exe("Michel");
-    frag.vaulthunter_dot_exe("Michel");
-    frag.vaulthunter_dot_exe("Michel");
-    frag.vaulthunter_dot_exe("Michel");
-    frag.vaulthunter_dot_exe("Michel");
+    frag.vaulthunter_dot_exe("Roger");
+    frag.vaulthunter_dot_exe("Roger");
+    frag.vaulthunter_dot_exe("Roger");
+    frag.vaulthunter_dot_exe("Roger");
+    frag.vaulthunter_dot_exe("Roger");
 
 	ScavTrap blop;
 	ScavTrap blip("Beyonce");
@@ -36,6 +37,21 @@ int main( void )
 	blip.challengeNewcomer("Gertrude");
 	blip.challengeNewcomer("Gertrude");
 	blip.challengeNewcomer("Gertrude");
+
+	NinjaTrap dop;
+	NinjaTrap dip("Lily");
+	dop.rangedAttack("Lily");
+    dip.takeDamage(20);
+	dip.beRepaired(80);
+    dop.meleeAttack("Lily");
+    dip.takeDamage(30);
+    dip.beRepaired(10);
+    dip.takeDamage(100);
+    dip.beRepaired(33);
+
+	dip.ninjaShoebox(blip);
+	dip.ninjaShoebox(trap);
+	dip.ninjaShoebox(dop);
 
 	return (0);
 }

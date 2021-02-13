@@ -16,13 +16,14 @@ public:
 	void meleeAttack(std::string const & target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
+	
 	void challengeNewcomer(std::string const & target);
 
-	void magicAttack(std::string const & target);
-	void swagAttack(std::string const & target);
-	void kamehaAttack(std::string const & target);
-	void flipTableAttack(std::string const & target);
-	void hugAttack(std::string const & target);
+	void danceChallenge(std::string const & target);
+	void singingChallenge(std::string const & target);
+	void flipChallenge(std::string const & target);
+	void riddleChallenge(std::string const & target);
+	void shifumiChallenge(std::string const & target);
 
 private:
 	unsigned int	_hitPoints;

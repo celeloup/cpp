@@ -49,13 +49,13 @@ ClapTrap &		ClapTrap::operator=(ClapTrap const & src)
 
 void ClapTrap::rangedAttack(std::string const & target) {
 	std::cout << this->_name << " used RANGED ATTACK on " << target << std::endl;
-	std::cout << "  (　･ω･)っ≡つ     - Yeehaaw !" << std::endl;
+	std::cout << " (　･ω･)っ≡つ     - Yeehaaw !" << std::endl;
 	std::cout << "Causing " << this->_rangedAttackDamage << " points of damage." << std::endl << std::endl;
 }
 
 void ClapTrap::meleeAttack(std::string const & target) {
 	std::cout << this->_name << " used MELEE ATTACK on " << target << std::endl;
-	std::cout << "  o(・_・)9     - Come get a taste of my fists !" << std::endl;
+	std::cout << " o(・_・)9     - Come get a taste of my fists !" << std::endl;
 	std::cout << "Causing " << this->_meleeAttackDamage << " points of damage." << std::endl << std::endl;
 }
 

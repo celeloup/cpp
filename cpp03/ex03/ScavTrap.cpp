@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: celeloup <celeloup@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/01/06 11:10:50 by celeloup          #+#    #+#             */
+/*   Updated: 2021/01/23 10:16:06 by celeloup         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ScavTrap.hpp"
 #include <iostream>
 
@@ -5,27 +17,33 @@
 #include <string>
 #include <stdlib.h>
 
+void	ScavTrap::initialisation()
+{
+	this->_hitPoints = 100;
+	this->_maxHitPoints = 100;
+	this->_energyPoints = 50;
+	this->_maxEnergyPoints = 50;
+	this->_level = 1;
+	this->_meleeAttackDamage = 20;
+	this->_rangedAttackDamage = 15;
+	this->_armorDamageReduction = 3;
+}
+
 // CONSTRUCTEURS
 
-ScavTrap::ScavTrap() : _hitPoints(100), _maxHitPoints(100), \
-	_energyPoints(50), _maxEnergyPoints(50), _level(1), _name("Kookie"), \
-	_meleeAttackDamage(20), _rangedAttackDamage(15), _armorDamageReduction(3){
+ScavTrap::ScavTrap() : ClapTrap() {
+	initialisation();
 	std::cout << "\e[2m[ Wild SC4V-TP " << this->_name << " appeared ! ]\e[0m" << std::endl << std::endl;
 	srand(time(NULL));
 }
 
-ScavTrap::ScavTrap(std::string name) : _hitPoints(100), _maxHitPoints(100), \
-	_energyPoints(50), _maxEnergyPoints(50), _level(1), _name(name), \
-	_meleeAttackDamage(20), _rangedAttackDamage(15), _armorDamageReduction(3) {
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+	initialisation();
 	std::cout << "\e[2m[ Wild SC4V-TP " << name << " appeared ! ]\e[0m" << std::endl << std::endl;
 	srand(time(NULL));
 }
 
-ScavTrap::ScavTrap(ScavTrap const & src) {
-	std::cout << "\e[2m[ SC4V-TP copied ]\e[0m" << std::endl << std::endl;
-	*this = src;
-	return ;
-}
+ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap(src) {}
 
 ScavTrap::~ScavTrap() {
 	std::cout << "\e[2m[ SC4V-TP " << this->_name << " is going back to where it came from ... ]\e[0m" << std::endl;
@@ -49,57 +67,6 @@ ScavTrap &		ScavTrap::operator=(ScavTrap const & src)
 }
 
 // FONCTIONS MEMBRES
-
-void ScavTrap::rangedAttack(std::string const & target) {
-	std::cout << this->_name << " used RANGED ATTACK on " << target << std::endl;
-	std::cout << " (　･ω･)っ≡つ     - I'm the best fighter !" << std::endl;
-	std::cout << "Causing " << this->_rangedAttackDamage << " points of damage." << std::endl << std::endl;
-}
-
-void ScavTrap::meleeAttack(std::string const & target) {
-	std::cout << this->_name << " used MELEE ATTACK on " << target << std::endl;
-	std::cout << " o(・_・)9     - Come and meet your fate !" << std::endl;
-	std::cout << "Causing " << this->_meleeAttackDamage << " points of damage." << std::endl << std::endl;
-}
-
-void ScavTrap::takeDamage(unsigned int amount) {
-	amount -= this->_armorDamageReduction;
-	if (amount > this->_hitPoints)
-		this->_hitPoints = 0;
-	else
-		this->_hitPoints -= amount;
-	std::cout << " > " << this->_name << " looses " << amount << " PV !" << std::endl << std::endl;
-	if (this->_hitPoints <= 0)
-	{	std::cout << "     " << this->_name << " died." << std::endl;
-		std::cout << "  |----------------|" << std::endl;
-		std::cout << "  |       __       |" << std::endl;
-		std::cout << "  |      |  |      |" << std::endl;
-		std::cout << "  |   ___|  |___   |" << std::endl;
-		std::cout << "  |  [___    ___]  |" << std::endl;
-		std::cout << "  |      |  |      |" << std::endl;
-		std::cout << "  |      |  |      |" << std::endl;
-		std::cout << "  |      |  |      |" << std::endl;
-		std::cout << "  |      |__|      |" << std::endl;
-		std::cout << "  |                |" << std::endl;
-		std::cout << "  |---- PRESS F ---|" << std::endl << std::endl;
-	}
-}
-
-void ScavTrap::beRepaired(unsigned int amount) {
-	if (this->_hitPoints <= 0)
-	{
-		std::cout << "\e[2m[ " << this->_name << " has left this world. No reparations will fix that ... ]\e[0m" << std::endl << std::endl;
-		return ;
-	}	
-	std::cout << "\e[2m[ " << this->_name << " is making some reparations ! ";
-	if (this->_hitPoints == _maxHitPoints)
-		std::cout << "But there's nothing to repair !]\e[0m" << std::endl << std::endl;
-	else if (this->_hitPoints + amount >= this->_maxHitPoints)
-		this->_hitPoints = this->_maxHitPoints;
-	else
-		this->_hitPoints += amount;
-	std::cout << "Back to " << this->_hitPoints << " PV (+" << amount << ") ]\e[0m" << std::endl << std::endl;
-}
 
 void ScavTrap::challengeNewcomer(std::string const & target) {
 	if (this->_energyPoints < 25)

@@ -57,7 +57,6 @@ float Fixed::toFloat(void) const
     return ((float)this->_fixed / (float)(1 << this->_nbBit));
 }
 
-
 std::ostream &operator<<(std::ostream &outStream, const Fixed &fixedValue)
 {
     outStream << fixedValue.toFloat();

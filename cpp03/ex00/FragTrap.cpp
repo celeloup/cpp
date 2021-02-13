@@ -1,131 +1,37 @@
 #include "FragTrap.hpp"
 #include <iostream>
-
-#include <sstream>
 #include <string>
 #include <stdlib.h>
-
-
-// UTILS
-
-std::string toUpper(std::string str)
-{
-	std::string ret = "";
-	unsigned long i = 0;
-	while (i < str.length())
-	{
-		if (str.at(i) >= 'a' && str.at(i) <= 'z')
-			ret += str.at(i) - 32;
-		else
-			ret += str.at(i);
-		i++;
-	}
-	return (ret);
-}
-
-void	printLine(int maxLength, char fill, std::string str, int strLength)
-{
-	std::string color = "  \e[7m|";
-	std::string end = "|\e[0m";
-
-	int fillLength = (maxLength - strLength) / 2;
-	std::string fillStr(fillLength, fill);
-	if ((maxLength - strLength) % 2 == 0)
-		std::cout << color << fillStr << str << fillStr << end << std::endl;
-	else
-		std::cout << color << fillStr << str << fillStr << fill << end << std::endl;
-}
-
-void	printAttack(std::string attacker, std::string attackName, \
-	std::string attack, unsigned long attackLength, std::string points, std::string target)
-{
-	// CREATING LINES
-	std::string firstLine = " " + toUpper(attacker) + " uses " + attackName + " ! ";
-	std::string lastLine = " causing " + points + " POINTS of damage to " + toUpper(target) + " ";
-	
-	// DETERMINATING MAX LENGTH
-	unsigned long maxLength = 52;
-	if (lastLine.length() > maxLength)
-		maxLength = lastLine.length();
-	if (firstLine.length() > maxLength)
-		maxLength = firstLine.length();
-	if ( attackLength > maxLength)
-		maxLength = attackLength;
-	
-	// PRINTING LINES
-	printLine(maxLength, '-', firstLine, firstLine.length());
-	printLine(maxLength, ' ', "  ", 2);
-	printLine(maxLength, ' ', attack, attackLength);
-	printLine(maxLength, ' ', "  ", 2);
-	printLine(maxLength, '-', lastLine, lastLine.length());
-	std::cout << std::endl;
-}
-
-void printHurt(std::string protag, std::string points)
-{
-	// CREATING LINES
-	std::string firstLine = " " + toUpper(protag) + " takes damages ! ";
-	std::string lastLine = " - " + points + " POINTS   (ಥ﹏ಥ) ";
-	int maxLength = 52;
-	printLine(maxLength, '-', firstLine, firstLine.length());
-	printLine(maxLength, ' ', " ", 1);
-	printLine(maxLength, ' ', lastLine, 22);
-	printLine(maxLength, ' ', " ", 1);
-	printLine(maxLength, '-', "-", 1);
-	std::cout << std::endl;
-}
-
-void printDead(std::string name)
-{
-	name = toUpper(name);
-	unsigned long to_add = (57 - name.length()) / 2;
-	to_add += name.length() + 1;
-	while (name.length() < to_add)
-		name = name.insert(0, " ");
-	std::cout << name << std::endl;
-	std::cout << "                    |----- died. ----|" << std::endl;
-	std::cout << "                    |       __       |" << std::endl;
-	std::cout << "                    |      |  |      |" << std::endl;
-	std::cout << "                    |   ___|  |___   |" << std::endl;
-	std::cout << "                    |  [___    ___]  |" << std::endl;
-	std::cout << "                    |      |  |      |" << std::endl;
-	std::cout << "                    |      |  |      |" << std::endl;
-	std::cout << "                    |      |  |      |" << std::endl;
-	std::cout << "                    |      |__|      |" << std::endl;
-	std::cout << "                    |                |" << std::endl;
-	std::cout << "                    |---- PRESS F ---|" << std::endl << std::endl;
-
-}
 
 // CONSTRUCTEURS
 
 FragTrap::FragTrap() : _hitPoints(100), _maxHitPoints(100), \
 	_energyPoints(100), _maxEnergyPoints(100), _level(1), _name("Albert"), \
 	_meleeAttackDamage(30), _rangedAttackDamage(20), _armorDamageReduction(5) {
-		std::cout << "\e[2m[ Albert has been SUMMONED ]\e[0m" << std::endl << std::endl;
+		std::cout << "\e[2m[ FR4G-TP Albert has been SUMMONED ]\e[0m" << std::endl << std::endl;
 		srand(time(NULL));
 	}
 
 FragTrap::FragTrap(std::string name) :_hitPoints(100), _maxHitPoints(100), \
 	_energyPoints(100), _maxEnergyPoints(100), _level(1), _name(name), \
 	_meleeAttackDamage(30), _rangedAttackDamage(20), _armorDamageReduction(5) {
-		std::cout << "\e[2m[ " << name << " has been SUMMONED ]\e[0m" << std::endl << std::endl;
+		std::cout << "\e[2m[ FR4G-TP " << name << " has been SUMMONED ]\e[0m" << std::endl << std::endl;
 		srand(time(NULL));
 	}
 
 FragTrap::FragTrap(FragTrap const & src) {
-	std::cout << "\e[2m[ Copy constructor called ]\e[0m" << std::endl << std::endl;
+	std::cout << "\e[2m[ FR4G-TP copied ]\e[0m" << std::endl << std::endl;
 	*this = src;
 	return ;
 }
 
 FragTrap::~FragTrap() {
-	std::cout << "\e[2m[ " << this->_name << " has been DESTROYED ]\e[0m" << std::endl << std::endl;
+	std::cout << "\e[2m[ FR4G-TP " << this->_name << " has been DESTROYED ]\e[0m" << std::endl;
 }
 
 FragTrap &		FragTrap::operator=(FragTrap const & src)
 {
-	std::cout << "\e[2m[ Assignation operator called ]\e[0m" << std::endl << std::endl;
+	std::cout << "\e[2m[ FR4G-TP assigned ]\e[0m" << std::endl << std::endl;
 	if (this == &src)
 		return (*this);
 	this->_hitPoints = src._hitPoints;
@@ -143,19 +49,15 @@ FragTrap &		FragTrap::operator=(FragTrap const & src)
 // FONCTIONS MEMBRES
 
 void FragTrap::rangedAttack(std::string const & target) {
-	std::ostringstream points;
-    points << this->_rangedAttackDamage;
-	printAttack(this->_name, "RANGED ATTACK", \
-		"(　･ω･)っ≡つ     - Yeehaaw !", \
-		28, points.str(), target);
+	std::cout << this->_name << " used RANGED ATTACK on " << target << std::endl;
+	std::cout << "  (　･ω･)っ≡つ     - Yeehaaw !" << std::endl;
+	std::cout << "Causing " << this->_rangedAttackDamage << " points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::meleeAttack(std::string const & target) {
-	std::ostringstream points;
-    points << this->_meleeAttackDamage;
-	printAttack(this->_name, "MELEE ATTACK", \
-		"o(・_・)9     - Come get a taste of my fists !", \
-		46, points.str(), target);
+	std::cout << this->_name << " used MELEE ATTACK on " << target << std::endl;
+	std::cout << "  o(・_・)9     - Come get a taste of my fists !" << std::endl;
+	std::cout << "Causing " << this->_meleeAttackDamage << " points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::takeDamage(unsigned int amount) {
@@ -164,17 +66,27 @@ void FragTrap::takeDamage(unsigned int amount) {
 		this->_hitPoints = 0;
 	else
 		this->_hitPoints -= amount;
-	std::ostringstream points;
-    points << amount;
-	printHurt(this->_name, points.str());
+	std::cout << " > " << this->_name << " looses " << amount << " PV !" << std::endl << std::endl;
 	if (this->_hitPoints <= 0)
-		printDead(this->_name);
+	{	std::cout << "     " << this->_name << " died." << std::endl;
+		std::cout << "  |----------------|" << std::endl;
+		std::cout << "  |       __       |" << std::endl;
+		std::cout << "  |      |  |      |" << std::endl;
+		std::cout << "  |   ___|  |___   |" << std::endl;
+		std::cout << "  |  [___    ___]  |" << std::endl;
+		std::cout << "  |      |  |      |" << std::endl;
+		std::cout << "  |      |  |      |" << std::endl;
+		std::cout << "  |      |  |      |" << std::endl;
+		std::cout << "  |      |__|      |" << std::endl;
+		std::cout << "  |                |" << std::endl;
+		std::cout << "  |---- PRESS F ---|" << std::endl << std::endl;
+	}
 }
 
 void FragTrap::beRepaired(unsigned int amount) {
 	if (this->_hitPoints <= 0)
 	{
-		std::cout << "\e[2m[ " << this->_name << " is dead. It's too late for reparations :'( ! ]\e[0m" << std::endl << std::endl;
+		std::cout << "\e[2m[ " << this->_name << " has left this world. No reparations will fix that ... ]\e[0m" << std::endl << std::endl;
 		return ;
 	}	
 	std::cout << "\e[2m[ " << this->_name << " is making some reparations ! ";
@@ -217,33 +129,31 @@ void FragTrap::vaulthunter_dot_exe(std::string const & target) {
 }
 
 void FragTrap::magicAttack(std::string const & target) {
-
-	printAttack(this->_name, "MAGIC ATTACK", \
-		"੭•̀ω•́)੭̸*✩⁺˚     - Sparkles all over you !", \
-		40, "25", target);
+	std::cout << this->_name << " used MAGIC ATTACK on " << target << std::endl;
+	std::cout << "  ੭•̀ω•́)੭̸*✩⁺˚     - Sparkles all over you !" << std::endl;
+	std::cout << "Causing 25 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::kamehaAttack(std::string const & target) {
-
-	printAttack(this->_name, "KAMEHAMEHA ATTACK", \
-		"༼つಠ益ಠ༽つ ─=≡ΣO))     - かめはめ 波 は !", \
-		41, "105", target);
+	std::cout << this->_name << " used KAMEHAMEHA ATTACK on " << target << std::endl;
+	std::cout << "  ༼つಠ益ಠ༽つ ─=≡ΣO))     - かめはめ 波 は !" << std::endl;
+	std::cout << "Causing 105 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::flipTableAttack(std::string const & target) {
-	printAttack(this->_name, "FLIP TABLE ATTACK", \
-		"(ﾉಠдಠ)ﾉ︵┻━┻     - Tables have turned !", \
-		39, "40", target);
+	std::cout << this->_name << " used FLIP TABLE ATTACK on " << target << std::endl;
+	std::cout << "  (ﾉಠдಠ)ﾉ︵┻━┻     - Tables have turned !" << std::endl;
+	std::cout << "Causing 40 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::swagAttack(std::string const & target) {
-	printAttack(this->_name, "SWAG ATTACK", \
-		"(つ▀¯▀)つ     - You can't handle my swag.", \
-		41, "65", target);
+	std::cout << this->_name << " used SWAG ATTACK on " << target << std::endl;
+	std::cout << "  (つ▀¯▀)つ     - You can't handle my swag." << std::endl;
+	std::cout << "Causing 65 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::hugAttack(std::string const & target) {
-	printAttack(this->_name, "HUG ATTACK", \
-		"(づ￣ ³￣)づ     - Come here baby.", \
-		34, "10", target);
+	std::cout << this->_name << " used HUG ATTACK on " << target << std::endl;
+	std::cout << "  (づ￣ ³￣)づ     - Come here baby." << std::endl;
+	std::cout << "Causing 10 points of damage." << std::endl << std::endl;
 }

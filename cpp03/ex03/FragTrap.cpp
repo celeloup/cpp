@@ -6,7 +6,7 @@
 /*   By: celeloup <celeloup@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 11:11:09 by celeloup          #+#    #+#             */
-/*   Updated: 2021/01/23 10:23:55 by celeloup         ###   ########.fr       */
+/*   Updated: 2021/01/23 10:22:04 by celeloup         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,30 +98,30 @@ void FragTrap::vaulthunter_dot_exe(std::string const & target) {
 
 void FragTrap::magicAttack(std::string const & target) {
 	std::cout << this->_name << " used MAGIC ATTACK on " << target << std::endl;
-	std::cout << "  ੭•̀ω•́)੭̸*✩⁺˚     - Sparkles all over you !" << std::endl;
+	std::cout << " ੭•̀ω•́)੭̸*✩⁺˚     - Sparkles all over you !" << std::endl;
 	std::cout << "Causing 25 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::kamehaAttack(std::string const & target) {
 	std::cout << this->_name << " used KAMEHAMEHA ATTACK on " << target << std::endl;
-	std::cout << "  ༼つಠ益ಠ༽つ ─=≡ΣO))     - かめはめ 波 は !" << std::endl;
+	std::cout << " ༼つಠ益ಠ༽つ ─=≡ΣO))     - かめはめ 波 は !" << std::endl;
 	std::cout << "Causing 105 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::flipTableAttack(std::string const & target) {
 	std::cout << this->_name << " used FLIP TABLE ATTACK on " << target << std::endl;
-	std::cout << "  (ﾉಠдಠ)ﾉ︵┻━┻     - Tables have turned !" << std::endl;
+	std::cout << " (ﾉಠдಠ)ﾉ︵┻━┻     - Tables have turned !" << std::endl;
 	std::cout << "Causing 40 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::swagAttack(std::string const & target) {
 	std::cout << this->_name << " used SWAG ATTACK on " << target << std::endl;
-	std::cout << "  (つ▀¯▀)つ     - You can't handle my swag." << std::endl;
+	std::cout << " (つ▀¯▀)つ     - You can't handle my swag." << std::endl;
 	std::cout << "Causing 65 points of damage." << std::endl << std::endl;
 }
 
 void FragTrap::hugAttack(std::string const & target) {
 	std::cout << this->_name << " used HUG ATTACK on " << target << std::endl;
-	std::cout << "  (づ￣ ³￣)づ     - Come here baby." << std::endl;
+	std::cout << " (づ￣ ³￣)づ     - Come here baby." << std::endl;
 	std::cout << "Causing 10 points of damage." << std::endl << std::endl;
 }

@@ -1,5 +1,5 @@
 #include "FragTrap.hpp"
-// #include "ScavTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main( void )
 {
@@ -21,22 +21,21 @@ int main( void )
     frag.vaulthunter_dot_exe("Roger");
     frag.vaulthunter_dot_exe("Roger");
 
-	// ScavTrap blop;
-	// ScavTrap blip("Beyonce");
+	ScavTrap blop;
+	ScavTrap blip("Beyonce");
 
-	// blop.rangedAttack("Beyonce");
-    // blip.takeDamage(20);
-	// blip.beRepaired(80);
-    // blop.meleeAttack("Beyonce");
-    // blip.takeDamage(30);
-    // blip.beRepaired(10);
-    // blip.takeDamage(100);
-    // blip.beRepaired(33);
+	blop.rangedAttack("Beyonce");
+    blip.takeDamage(20);
+	blip.beRepaired(80);
+    blop.meleeAttack("Beyonce");
+    blip.takeDamage(30);
+    blip.beRepaired(10);
+    blip.takeDamage(100);
+    blip.beRepaired(33);
 
-	// blip.challengeNewcomer("Gertrude");
-	// blip.challengeNewcomer("Gertrude");
-	// blip.challengeNewcomer("Gertrude");
-
+	blip.challengeNewcomer("Gertrude");
+	blip.challengeNewcomer("Gertrude");
+	blip.challengeNewcomer("Gertrude");
 
 	return (0);
 }
